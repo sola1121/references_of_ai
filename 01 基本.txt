@@ -1,0 +1,34 @@
+1. 机器学习与测试数据集合
+    人工智能, 机器学习通常都使用两组数据, 一组作为训练数据, 一组作为测试数据.
+    每组数据中都包含一组多维的参数数据集作为特征数据集, 以及一组一维的数据作为结果分类数据, 从而形成4个数据集合.
+    通常这4组数据变量的名称是:
+        x_train, 训练数据, 多维参数数据集.
+        y_train, 训练数据, 一维结果数据集.
+        x_test, 测试数据, 多维参数数据集.
+        y_test, 测试数据, 一维结果数据集.
+    习惯上, train数据集用于训练, test数据集用于测试. 此外, 通过对数据集y_train的分析, 会生成一个新的预测结果数据集y_pred, 这个数据集意识一维的结果数据集.
+    通过对结果数据集y_pred与实际的测试数据集y_test进行对比, 就可以检测算法模型的准确度.
+    一般, x表参数, y表示结果; train表示训练用, test表示测试用.
+
+2. 机器学习运行流程
+    · 选择模型函数mx_fun, mx_fun是我们自定义的机器学习函数接口.
+    · 把训练用的特征数据集x_train和对应的特征(结果)数据集y_train, 输入模型函数mx_fun.
+    · 系统内置的机器学习函数, 会自动分析特征数据与结果数据之间的关系. 这样的一个过程就是机器学习的过程, 也是算法建模的过程.
+    · 通过对训练数据的机器学习和数据分析, 系统会生成一个AI机器学习模型, 我们将其保存到变脸mx.
+    · 把测试数据x_text输入模型变量mx, mx会调用内置的分析函数predict, 生成最终的分析结果y_pred.
+    · 如果是实盘, 输入最新的数据, 例如今天的股市数据或正在销售的足彩比赛赔率数据, 系统会自动生成相关的预测数据.
+    在进行实盘运行之前, 我们会对y_pred和正确结果数据y_test进行对比, 以判断模型的准确程度, 并通过一些优化措施和结果调整参数进行迭代运算, 或采用其他的模型提高最终结果的准确度.
+    选择模型函数mx_fun --> 导入训练数据 --> 建立算法模型MX --> 输入测试(实盘)数据x_test --> 调用predict分析(预测)函数 --> 生成分析(预测)结果y_pred
+
+3. 经典的机器学习算法
+    在Sklearn模块库中
+        线性回归算法, 函数名: LinearRegression
+        朴素贝叶斯算法, Multinomial Naive Bayes, 函数名: Multinomialnb
+        kNN邻近算法, 函数名: KNeighborsClassifier
+        逻辑回归算法, 函数名: LogisticRegression
+        随机森林算法, Random Forest Classifier, 函数名: RandomForestClassifier
+        决策树算法, Decision Tree, 函数名: tree.DecisionTreeClassifier
+        GBDT迭代决策树算法, Gradient Boosting Decision Tree, 又叫MART(Multiple Additive Regression Tree), 函数名: GradientBoostingClassifier
+        SVM向量机算法, 函数名: SVC
+        SVM-cross向量机交叉算法, 函数名: SVC
+

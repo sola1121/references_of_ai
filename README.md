@@ -1,2 +1,5 @@
-# references_of_machine_learning
-machine learning references. the record of my study.
+# 我的机器学习
+
+The record of my machine learning study.
+
+form _Python Machine Learning CookBook_.
