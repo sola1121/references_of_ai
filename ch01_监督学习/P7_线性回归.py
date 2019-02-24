@@ -1,4 +1,3 @@
-import sys
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib; matplotlib.use("Qt5Agg")
@@ -25,16 +24,17 @@ y_train = np.array(y[:num_training])
 x_test = np.array(x[num_training:]).reshape((num_test, 1))   # 变成有num_test行, 1列的空间向量
 y_test = np.array(y[num_training:])
 
+# 也可以使用岭回归器linear_model.Ridge, 将其alpha值设小一点就可以了.
 # 创建线性回归器
-linear_regressior = LinearRegression()
+linear_regressor = LinearRegression()
 # 用训练数据集训练模型
-linear_regressior.fit(x_train, y_train)
+linear_regressor.fit(x_train, y_train)
 
 # 使用模型对训练数据x_train的y_train进行预测
-y_train_pred = linear_regressior.predict(x_train)
+y_train_pred = linear_regressor.predict(x_train)
 
 # 使用模型对测试数据x_test的y_test进行预测
-y_test_pred = linear_regressior.predict(x_test)
+y_test_pred = linear_regressor.predict(x_test)
 
 
 plt.figure()

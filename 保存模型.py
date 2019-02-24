@@ -1,7 +1,7 @@
 import pickle
 
 
-output_model_file = "../tmp/saved_model.pkl"
+output_model_file = "./tmp/saved_model.pkl"
 
 def dump_object(model_object):
     with open(output_model_file, "wb") as file:
