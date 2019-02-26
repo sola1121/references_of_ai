@@ -55,24 +55,19 @@ def plot_feature_importances(feature_importances, title, feature_names):
     # 将重要性值标准化
     feature_importances = 100.0 * (feature_importances / max(feature_importances))
     # 将得分从高到底排序
-    index_sorted = np.flipud(np.argsort(feature_importances))
-    print(index_sorted, index_sorted.shape)   # DEBUG:
+    index_sorted = np.flipud(np.argsort(feature_importances))   # 使用argsort是由小到大返回标, 使用flipud翻转顺序
     # 让X坐标上的标签居中显示
-    pos = np.arange(index_sorted.shape[0]) + 0.5
-    print(pos)   # DEBUG:
+    pos = np.arange(index_sorted.shape[0]) + 0.5   # shape这里是array的形状, 取第一个就是列的个数, 即数据多少.
     # 画条形图
     plt.figure()
     plt.bar(pos, feature_importances[index_sorted], align='center')
     plt.xticks(pos, feature_names[index_sorted], rotation=45)
     plt.ylabel('Relative Importance')
     plt.title(title)
-    # plt.show()
+    plt.show()
 
 print("\n决策树使用的各个指标占有率:\n", dt_regressor.feature_importances_)
 print("\nAdaBoost算法优化后使用的各个指标占有率:\n", ab_regressor.feature_importances_)
 
 plot_feature_importances(dt_regressor.feature_importances_, "Decision Tree regressor", housing_data.feature_names)
-# plot_feature_importances(ab_regressor.feature_importances_, "AdaBoot regressor", housing_data.feature_names)
-
-
-
+plot_feature_importances(ab_regressor.feature_importances_, "AdaBoot regressor", housing_data.feature_names)
