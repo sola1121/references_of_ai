@@ -21,12 +21,12 @@ num_training = int(0.8*len(X))
 X_train, y_train = X[:num_training], y[:num_training]
 X_test, y_test = X[num_training:], y[num_training:]
 
-# 拟合一个决策树
 # 选择最大深度为4, 这样可以限制决策树不变成任意深度
 dt_regressor = DecisionTreeRegressor(max_depth=4)
 dt_regressor.fit(X_train, y_train)
 
-# 代如AdaBoost算法的决策树回归模型进行拟合
+# 拟合一个决策树
+# 代入AdaBoost算法的决策树回归模型进行拟合
 ab_regressor = AdaBoostRegressor(DecisionTreeRegressor(max_depth=4), n_estimators=400, random_state=7)
 ab_regressor.fit(X_train, y_train)
 
