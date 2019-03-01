@@ -21,7 +21,7 @@ def plot_classifier(classifier, X, y):
     # 用色彩区域画出分类结果
     plt.figure()
     # 选择配色方案, x坐标网格值, y坐标网格值, 在对应的(x, y)上对应的颜色值
-    plt.pcolormesh(x_values, y_values, mesh_output, cmap=plt.cm.gray)   # 在网格中对应的点(x, y)与其对应的颜色值C
+    plt.pcolormesh(x_values, y_values, mesh_output, cmap=plt.cm.gray)   # 在网格中对应的点(x, y)与其对应的颜色值
     plt.scatter(X[:, 0], X[:, 1], c=y, s=80, edgecolors="black", linewidths=1, cmap=plt.cm.Paired)  # 单独画出训练使用的点
     # 设置图形的取值范围
     plt.xlim(x_values.min(), x_values.max())

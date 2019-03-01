@@ -29,13 +29,10 @@ def plot_classifier(classifier, X, y):
     step_size = 0.01
     # 定义网格, 使用X集的x坐标和y坐标的取值范围生成网格数据
     x_values, y_values = np.meshgrid(np.arange(x_min, x_max, step_size), np.arange(y_min, y_max, step_size))
-    print("\ngrid values\nx\n", x_values, "\ny\n", y_values)
-    # 计算分类器输出结果
+    # 计算分类器输出结果, 对网格中的数据点进行预测, ravel将矩阵平面展开, c_将平面矩阵以列拼接
     mesh_output = classifier.predict(np.c_[x_values.ravel(), y_values.ravel()])
-    print("\n\noriginal mesh_out\n", mesh_output, "\n\n")
     # 数组维度变形
     mesh_output = mesh_output.reshape(x_values.shape)
-    print("reshaped mesh_out\n", mesh_output)
     # 用色彩区域画出分类结果
     plt.figure()
     # 选择配色方案, x坐标网格值, y坐标网格值, 在对应的(x, y)上对应的颜色值

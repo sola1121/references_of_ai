@@ -32,11 +32,11 @@ x_values, y_values = np.meshgrid(np.arange(x_min, x_max, accuracy_step), np.aran
 X_test = np.c_[x_values.ravel(), y_values.ravel()]
 
 # 使用训练模型进行预测
-y_test = logistic_classifier.predict(X_test)
-y_test = y_test.reshape(x_values.shape)   # 同化shape, 好作图
-print(y_test)
+y_pred = logistic_classifier.predict(X_test)
+y_pred = y_pred.reshape(x_values.shape)   # 同化shape, 好作图
+print(y_pred)
 
 # 作图
 plt.figure()
-plt.pcolormesh(x_values, y_values, y_test, cmap="tab10")
+plt.pcolormesh(x_values, y_values, y_pred, cmap="tab10")
 # plt.show()
