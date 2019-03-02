@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib; matplotlib.use("Qt5Agg")
 import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB   # 高斯朴素贝叶斯
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import confusion_matrix
 
 
 def plot_classifier(classifier, X, y):
@@ -28,7 +29,7 @@ def plot_classifier(classifier, X, y):
     # 设置X轴与Y轴
     plt.xticks(np.arange(x_min, x_max, 1.0))
     plt.yticks(np.arange(y_min, y_max, 1.0))
-    plt.show()
+    # plt.show()
 
 file_dir = "./dat/data_multivar.txt"
 X, y = list(), list()
@@ -53,6 +54,25 @@ y_test_pred = gaussiannb_classifier.predict(X_test)
 # 计算分类器的准确性
 accuracy = 100.0 * sum(y_test==y_test_pred) / X_test.shape[0]
 print("Accuracy of the classifier =", round(accuracy, 2), "%")
+
+# 使用model_selection.cross_val_score()将所有数据集带入进行交叉验证
+num_validations = 7   # 拆分策略, 最后结果集的大小
+# 准确率
+accuracy = cross_val_score(gaussiannb_classifier, X, y=y, scoring="accuracy", cv=num_validations)
+print("Accuracy2 of the classifier: ", round(100*accuracy.mean(), 2), "%.", "     origin: ", accuracy)
+# 精度
+precision = cross_val_score(gaussiannb_classifier, X, y=y, scoring="precision_weighted", cv=num_validations)
+print("Precision of the classifier: ", round(100*precision.mean(), 2), "%.", "     origin: ", precision)
+# 召回率
+recall = cross_val_score(gaussiannb_classifier, X, y=y, scoring="recall_weighted", cv=num_validations)
+print("Precision of the classifier: ", round(100*recall.mean(), 2), "%.", "     origin: ", recall)
+# F1得分
+f1 = cross_val_score(gaussiannb_classifier, X, y=y, scoring="f1_weighted", cv=num_validations)
+print("Precision of the classifier: ", round(100*f1.mean(), 2), "%.", "     origin: ", f1)
+
+# 混淆矩阵
+confusion_matrix_mat = confusion_matrix(y_true=y_test, y_pred=y_test_pred)
+print(confusion_matrix_mat)
 
 # 作画
 plot_classifier(gaussiannb_classifier, X_test, y_test)
