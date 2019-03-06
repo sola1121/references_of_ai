@@ -1,4 +1,4 @@
-# 交叉验证(cross validation)
+# NOTE: 交叉验证(cross validation)
 # 为了能让模型更贱稳定, 还需要用数据集的不同子集进行反复的验证. 如果只是对特定的子集进行微调, 最终可能会过度拟合(overfitting)模型.
 # 过度拟合的模型在已知的数据集上表现很好, 但是在未知数据集上表现不好.
 # 精度(precision), 召回率(recall), F1得分(F1 score), 可以用参数评分标准(parameter scoring)获得各项指标得分.
@@ -31,7 +31,7 @@ def cross_validation(classifer, X, y):
 
 
 
-# 混淆矩阵(confusion matrix)
+# NOTE: 混淆矩阵(confusion matrix)
 # 混淆矩阵是理解分类模型性能的数据表, 他有助于理解如何把测试数据分成不同的类.
 # 当想进行算法调优时, 就需要在对算法做出改变之前了解数据的错误分类情况. 有些分类效果比其他分类效果差, 混淆矩阵可以帮助理解这些问题.
 # 理想情况下, 希望矩阵非对角先元素都是0. 即多有的元素都被模型分类到了其对应的类别
@@ -40,13 +40,13 @@ import matplotlib; matplotlib.use("Qt5Agg")
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix   # 用于生成混淆矩阵
 
-# 虚构数据
+# 虚构数据, 共0, 1, 2, 3四个分类
 y_true = [1, 0, 0, 2, 1, 0, 3, 3, 3]
 y_pred = [1, 1, 0, 2, 1, 0, 1, 3, 3]
 
 
 def generate_confusion_matrix(y_true, y_pred):
-    confusion_matrix_mat = confusion_matrix(y_true=y_true, y_pred=y_pred)
+    confusion_matrix_mat = confusion_matrix(y_true=y_true, y_pred=y_pred)   # 混淆矩阵
 
     # 作图, 将会以分类种类的个数的表格, 这里是直接以颜色来进行映射数目
     plt.imshow(confusion_matrix_mat, interpolation="nearest", cmap=plt.cm.Paired)
@@ -62,7 +62,7 @@ def generate_confusion_matrix(y_true, y_pred):
 generate_confusion_matrix(y_true, y_pred)
 
 
-# 提取性能报告
+# NOTE: 提取性能报告
 # 使用性能报告直接生成精度precision, 召回率recall, f1得分f1 score
 from sklearn.metrics import classification_report
 
@@ -71,3 +71,30 @@ targets_names = ["分类0", "分类1", "分类2", "分类3"]
 report = classification_report(y_true=y_true, y_pred=y_pred, target_names=targets_names)
 
 print(report)
+
+
+# NOTE: 验证曲线 validation curve
+# 在分类器中, n_estimators和max_depth参数被称为超参数(hyperparameters), 分类器的性能就是由他们决定的.
+# 当改变超参数的时候, 如果能直观的观看到分类器性能的变化, 那就太好了, 这就是验证曲线的作用.
+from sklearn.model_selection import validation_curve
+
+
+def generate_validation_curve(classifier, X, y, param_name, param_range):
+    train_scores, validation_scores = validation_curve(classifier, X, y, param_name=param_name, param_range=param_range, cv=5)
+    return train_scores, validation_scores
+
+param_name = "n_estimators"   # 同理可以对max_depth进行验证
+parameter_grid = np.linspace(25, 200, 8).astype(int)
+
+
+# NOTE: 学习曲线 learning vurve
+# 学习曲线可也帮助理解训练集数据的大小对机器学习的影响. 
+# 当遇到计算能力限制时, 这一点非常有用.
+from sklearn.model_selection import learning_curve
+
+
+def generate_learning_curve(classifer, X, y, size):
+    train_sizes, train_scores, validation_scores = learning_curve(classifer, X, y, train_sizes=parameter_grid, cv=5)
+    return train_sizes, train_scores, validation_scores
+
+parameter_grid = np.array([[200, 500, 800, 1100],])
