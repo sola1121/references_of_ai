@@ -46,6 +46,9 @@ x_values, y_values = np.meshgrid(np.arange(x_min, x_max, 0.1), np.arange(y_min, 
 mesh_output = classifier.predict(np.c_[x_values.ravel(), y_values.ravel()])   # 使用网格数据带入模型进行验证
 mesh_output = mesh_output.reshape(x_values.shape)
 
+print(x_values, x_values.shape, "\n\n", y_values, y_values.shape, "\n")
+print(mesh_output, mesh_output.shape)
+
 plt.figure()
 plt.pcolormesh(x_values, y_values, mesh_output)
 # 将原始的数据分类

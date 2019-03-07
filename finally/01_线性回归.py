@@ -9,7 +9,7 @@ from sklearn.metrics import (mean_absolute_error, mean_squared_error, median_abs
                              explained_variance_score, r2_score )
 
 
-data_dir = "../ch01_监督学习/dat/data_singlevar.txt"
+data_dir = "../ch01_监督学习_回归_线性回归/dat/data_singlevar.txt"
 x, y = list(), list()
 
 with open(data_dir, "r") as file:

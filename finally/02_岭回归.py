@@ -3,7 +3,7 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import (mean_absolute_error, mean_squared_error, median_absolute_error, 
                              explained_variance_score, r2_score)
 
-file_dir = "../ch01_监督学习/dat/data_multivar.txt"
+file_dir = "../ch01_监督学习_回归_线性回归/dat/data_multivar.txt"
 
 x, y = list(), list()
 

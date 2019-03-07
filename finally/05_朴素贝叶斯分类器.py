@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.naive_bayes import GaussianNB
 
-file_dir = "../ch02_创建分类器/dat/data_multivar.txt"
+file_dir = "../ch02_监督学习_分类_创建分类器/dat/data_multivar.txt"
 X, y = list(), list()
 
 with open(file_dir, "r") as file:
@@ -28,7 +28,7 @@ accuracy = sum(y_test_pred==y_test) / y_test_pred.shape[0] * 100
 print("Accuracy is %.2f" % accuracy, "%.")
 
 # 使用所有数据集进行交叉验证
-num_validatins = 5
+num_validations = 5
 # 准确率
 accuracy = cross_val_score(gaussiannb_classifier, X, y=y, scoring="accuracy", cv=num_validations)
 print("Accuracy2 of the classifier: ", round(100*accuracy.mean(), 2), "%.", "     origin: ", accuracy)

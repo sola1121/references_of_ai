@@ -4,7 +4,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
 
-file_dir = "../ch01_监督学习/dat/data_multivar.txt"
+file_dir = "../ch01_监督学习_回归_线性回归/dat/data_multivar.txt"
 
 x, y = list(), list()
 
