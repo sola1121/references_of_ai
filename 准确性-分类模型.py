@@ -1,4 +1,5 @@
 # NOTE: 交叉验证(cross validation)
+# 使用所有的数据进行计算, X, y
 # 为了能让模型更贱稳定, 还需要用数据集的不同子集进行反复的验证. 如果只是对特定的子集进行微调, 最终可能会过度拟合(overfitting)模型.
 # 过度拟合的模型在已知的数据集上表现很好, 但是在未知数据集上表现不好.
 # 精度(precision), 召回率(recall), F1得分(F1 score), 可以用参数评分标准(parameter scoring)获得各项指标得分.
@@ -32,6 +33,7 @@ def cross_validation(classifer, X, y):
 
 
 # NOTE: 混淆矩阵(confusion matrix)
+# 使用测试集数据和预测的测试集数据进行计算, y_test, y_test_pred
 # 混淆矩阵是理解分类模型性能的数据表, 他有助于理解如何把测试数据分成不同的类.
 # 当想进行算法调优时, 就需要在对算法做出改变之前了解数据的错误分类情况. 有些分类效果比其他分类效果差, 混淆矩阵可以帮助理解这些问题.
 # 理想情况下, 希望矩阵非对角先元素都是0. 即多有的元素都被模型分类到了其对应的类别
@@ -63,6 +65,7 @@ generate_confusion_matrix(y_true, y_pred)
 
 
 # NOTE: 提取性能报告
+# 使用测试集数据和预测的数据集进行计算, y_test, y_test_pred
 # 使用性能报告直接生成精度precision, 召回率recall, f1得分f1 score
 from sklearn.metrics import classification_report
 
@@ -74,6 +77,7 @@ print(report)
 
 
 # NOTE: 验证曲线 validation curve
+# 使用所有的数据集进行计算, X, y
 # 在分类器中, n_estimators和max_depth参数被称为超参数(hyperparameters), 分类器的性能就是由他们决定的.
 # 当改变超参数的时候, 如果能直观的观看到分类器性能的变化, 那就太好了, 这就是验证曲线的作用.
 from sklearn.model_selection import validation_curve
@@ -88,6 +92,7 @@ parameter_grid = np.linspace(25, 200, 8).astype(int)
 
 
 # NOTE: 学习曲线 learning vurve
+# 使用所有的数据集进行计算, X, y
 # 学习曲线可也帮助理解训练集数据的大小对机器学习的影响. 
 # 当遇到计算能力限制时, 这一点非常有用.
 from sklearn.model_selection import learning_curve
@@ -98,3 +103,4 @@ def generate_learning_curve(classifer, X, y, size):
     return train_sizes, train_scores, validation_scores
 
 parameter_grid = np.array([[200, 500, 800, 1100],])
+

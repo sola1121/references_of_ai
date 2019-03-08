@@ -17,17 +17,17 @@ with open(file_dir, "r") as file:
 X, y = np.array(X), np.array(y)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=7)
 
-# 使用不同的核定义不同的SVM向量机, 并训练
+# MARK: 使用不同的核定义不同的SVM向量机, 并训练
 # SVM线性分类器
-linear_classifier = SVC(kernel="linear")
+linear_classifier = SVC(kernel="linear", class_weight="balanced")
 linear_classifier.fit(X_train, y_train)
 
 # SVM多项式分类器(非线性分类)
-poly_classifier = SVC(kernel="poly", degree=4)
+poly_classifier = SVC(kernel="poly", degree=4, class_weight="balanced")
 poly_classifier.fit(X_train, y_train)
 
 # SVM径向基函数分类器(非线性分类)
-rbf_classifier = SVC(kernel="rbf")
+rbf_classifier = SVC(kernel="rbf", class_weight="balanced")
 rbf_classifier.fit(X_train, y_train)
 
 # 使用测试数据进行验证
@@ -51,3 +51,4 @@ rbf_report = classification_report(y_true=y_test, y_pred=rbf_y_test_pred)
 print("Linear classifier model report:\n", linear_report, "\n")
 print("Poly classifier model report:\n", poly_report, "\n")
 print("RBF classifier model report:\n", rbf_report, "\n")
+
