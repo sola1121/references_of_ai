@@ -52,3 +52,5 @@ print("Linear classifier model report:\n", linear_report, "\n")
 print("Poly classifier model report:\n", poly_report, "\n")
 print("RBF classifier model report:\n", rbf_report, "\n")
 
+# MARK: SVM向量机还可以配置回归器
+# {"kernel": "rbf", "C": 10.0}   这样的参数就可以完成一个简单的径向基回归器
