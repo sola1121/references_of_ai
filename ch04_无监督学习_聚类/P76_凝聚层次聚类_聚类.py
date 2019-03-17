@@ -6,6 +6,7 @@ from sklearn.neighbors import kneighbors_graph
 
 
 def perform_clustering(X, connectivity, title, num_clusters=3, linkage="ward"):
+    """实现凝聚层次聚类的函数"""
     plt.figure()
     model = AgglomerativeClustering(n_clusters=num_clusters, connectivity=connectivity, linkage=linkage)
     model.fit(X)
@@ -20,6 +21,7 @@ def perform_clustering(X, connectivity, title, num_clusters=3, linkage="ward"):
 
 
 def get_spiral(t, noise_amplitude=.5):
+    """螺旋状数据点"""
     r = t
     x = r * np.cos(t)
     y = r * np.sin(t)
@@ -27,12 +29,14 @@ def get_spiral(t, noise_amplitude=.5):
 
 
 def add_noise(x, y, amplitude):
+    """添加噪声"""
     X = np.concatenate((x, y))
     X += amplitude * np.random.randn(2, X.shape[1])
     return X.T
 
 
 def get_rose(t, noise_amplitude=.02):
+    """获取位于玫瑰曲线上的数据点 rose curve"""
     # 设置玫瑰曲线方程; 如果变量k是奇数, 那么曲线有k朵花瓣; 如果k是偶数, 那么有2k朵花瓣
     k = 5
     r = np.cos(k*t) + .25
@@ -43,6 +47,7 @@ def get_rose(t, noise_amplitude=.02):
 
 
 def get_hypotrochoid(t, noise_amplitude):
+    """增加多样性"""
     a, b, h = 10.0, 2.0, 4.0
     x = (a - b) * np.cos(t) + h * np.cos((a - b) / b * t)
     y = (a - b) * np.sin(t) - h * np.sin((a - b) / b * t)
