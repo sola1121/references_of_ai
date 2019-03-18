@@ -52,7 +52,7 @@ def plot_cluster(model, X):
     labels = model.labels_   # 提取标记点
     centroids = model.cluster_center_   # 提取中心点
     num_clusters = len(np.unique(labels))   # 中心点的个数
-    markers = ".*xv^+Dd<>sp1234|_"   # 用于区分不同的数据集的点的样式, 可以处理18种分类样式
+    markers = ".*xv^+d<>spD1234|_"   # 用于区分不同的数据集的点的样式, 可以处理18种分类样式
     plt.figure()
     for i, marker in zip(range(num_clusters), markers[:num_clusters]):
         # 画出属于某个集群中心点的数据点
