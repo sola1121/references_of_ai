@@ -1,0 +1,26 @@
+推荐引擎
+推荐引擎是一个能预测用户兴趣点的模型.
+推荐引擎通过协同过滤(collaborative filtering)或基于内容的过滤(content-based filtering)来产生一组推荐.
+两种过滤方法的不同之处在于挖掘推荐的方式.
+协同过滤从当前用户过去的行为和其他用户对当前用户的评分来构建模型, 然后使用这个模型来预测这个用户可能感兴趣的内容
+基于内容的过滤用商品本身的特征来给用户推荐更多的商品, 商品间的相似度是模型主要的关注点.
+
+from sklearn.ensemble import RandomForestClassifier    # 使用随机深林分类器增强
+from sklearn.feature_selection import SelectKBest, f_regression   # 特征选择, 使用单变量线性回归测试
+from sklearn.pipeline import Pipeline
+
+# 特征选择器, 选择k个最好的特征, 这里k为10
+selector_k_best = SelectKBest(score_func=f_regression, k=10)
+
+# 随机森林分类器
+classifier = RandomForestClassifier(n_estimators=50, max_depth=4)
+
+# 构建机器学习流水线, 以输入顺序执行, 并为每一步指定一个名称
+pipeline_classifier = Pipeline([("selector", selector_k_best), ("rf", classifier)])
+
+选择k个最好的特征, 其好处在于可以处理较小维度的数据, 这对减小计算复杂度来说非常有用.
+选择k个最佳特征的方式是基于单变量的特征的选择, 选择过程是先进行单变量统计测试, 然后从特征向量中抽取最优秀的特征.
+单变量统计测试是指涉及一个变量的分析技术.
+做了这些测试后, 向量空间中的每个特征将有一个评价分数.
+基于这些评价分数, 选择最好的k个特征. 在分类器流水线中执行这个预处理步骤.
+一旦抽取出k个特征, 一个k维的特征向量就形成了, 可以将这个特征向量用于随机森林分类器的输入训练数据.
