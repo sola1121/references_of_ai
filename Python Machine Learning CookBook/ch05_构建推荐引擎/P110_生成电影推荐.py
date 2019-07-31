@@ -16,16 +16,22 @@ def generate_recommendations(dataset, user):
     total_scores = {}
     similarity_sums = {}
 
-    for u in [x for x in dataset if x != user]:
-        similarity_score = pearson_score(dataset, user, u)
+    for other_user in [u for u in dataset if u != user]:
+        similarity_score = pearson_score(dataset, user, other_user)
 
         if similarity_score <= 0:
             continue
 
         # 找到未被该用户评分的电影
-        for item in [x for x in dataset[u] if x not in dataset[user] or dataset[user][x] == 0]:
-            total_scores.update({item: dataset[u][item] * similarity_score})
+        un_comment = [m for m in dataset[other_user] if m not in dataset[user] or dataset[user][m] == 0]
+        print(un_comment)
+
+        for item in un_comment:
+            total_scores.update({item: dataset[other_user][item] * similarity_score})
             similarity_sums.update({item: similarity_score})
+
+    print("total_scores", total_scores)
+    print("\nsimilarity_sums", similarity_sums)
 
     # 如果该用户看过数据库中所有的电影, 那就不能为用户推荐电影
     if len(total_scores) == 0:
@@ -53,14 +59,14 @@ if __name__ == "__main__":
     file.close()
 
     user = "William Reynolds"   # Michael Henry"
-    print("\nRecommandations for " + user + ":")
+    # print("\nRecommandations for " + user + ":")
     movies = generate_recommendations(data, user)
-    for i, movie in enumerate(movies):
-        print(i+1, " -- ", movie)
+    # for i, movie in enumerate(movies):
+    #     print(i+1, " -- ", movie)
 
     user = "John Carson"
-    print("\nRecommandations for " + user + ":")
+    # print("\nRecommandations for " + user + ":")
     movies = generate_recommendations(data, user)
-    for i, movie in enumerate(movies):
-        print(i+1, " -- ", movie)
+    # for i, movie in enumerate(movies):
+    #     print(i+1, " -- ", movie)
 
