@@ -1,4 +1,4 @@
-# 我的机器学习
+# 我的人工智能笔记
 
 The record of my machine learning study.
 
