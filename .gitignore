@@ -119,3 +119,5 @@ dmypy.json
 # 忽略临时目录 tmp
 */tmp/*
 tmp/*
+机器学习简单学习/手写数字识别技术探索.pptx
+.gitignore
